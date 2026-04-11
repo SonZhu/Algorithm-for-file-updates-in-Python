@@ -1,1 +1,26 @@
+# Assign the file names to variables
+import_file = "allow_list.txt"
+remove_file = "remove_list.txt"
+# Open the files and read the contents into variables
+with open(import_file, "r") as file:
+    ip_addresses = file.read()
 
+with open(remove_file, "r") as file:
+    remove_list = file.read()
+
+# Split Strings
+ip_addresses = ip_addresses.split()
+remove_list = remove_list.split()
+
+#Iterate through lists and add unique entries to a new list
+ip_address_match = []
+for element in ip_addresses:
+    if element not in remove_list:
+        ip_address_match.append(element)
+ip_addresses = ip_address_match
+
+# Join list to string and update original file
+
+ip_addresses = "\n".join(ip_addresses)
+with open(import_file, "w") as file:
+    file.write(ip_addresses)
